@@ -1,0 +1,43 @@
+buildscript {
+    repositories {
+        mavenLocal()
+    }
+    dependencies {
+        classpath 'eowiz.gradle.plugin:hello_world_gradle_plugin:1.0-SNAPSHOT'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+}
+
+apply plugin: 'hello-world-gradle-plugin'
+
+group 'eowiz.gradle.plugin'
+version '1.0-SNAPSHOT'
+
+gradlePlugin {
+    plugins {
+        helloWorldGradlePlugin {
+            id = 'hello-world-gradle-plugin'
+            implementationClass = 'eowiz.gradle.plugin.HelloWorldGradlePlugin'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation gradleApi()
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+}
+
+test {
+    useJUnitPlatform()
+}
